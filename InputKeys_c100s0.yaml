@@ -1,0 +1,234 @@
+BCPressure:
+  PatchNames: x-lower x-upper y-lower  y-upper z-lower z-upper
+Cell:
+  '0':
+    dzScale:
+      Value: 0.4
+  '1':
+    dzScale:
+      Value: 0.25
+  '2':
+    dzScale:
+      Value: 0.15
+  '3':
+    dzScale:
+      Value: 0.1
+  '4':
+    dzScale:
+      Value: 0.05
+  '5':
+    dzScale:
+      Value: 0.025
+  '6':
+    dzScale:
+      Value: 0.025
+ComputationalGrid:
+  DX: 100
+  DY: 100
+  DZ: 10
+  Lower:
+    X: 0.0
+    Y: 0.0
+    Z: 0.0
+  NX: 100
+  NY: 100
+  NZ: 7
+Contaminants:
+  Names: ''
+Cycle:
+  Names: constant
+  constant:
+    Names: alltime
+    Repeat: -1
+    alltime:
+      Length: 1
+Domain:
+  GeomName: domain
+FileVersion: 4
+Geom:
+  Perm:
+    Names: domain
+    TensorByGeom:
+      Names: domain
+  Porosity:
+    GeomNames: domain
+  domain:
+    ICPressure:
+      RefGeom: domain
+      RefPatch: z-upper
+      Value: -2.0
+    Upper:
+      X: 10000.0
+      Y: 10000.0
+      Z: 70.0
+    Lower:
+      X: 0.0
+      Y: 0.0
+      Z: 0.0
+    Patches: x-lower x-upper y-lower y-upper z-lower z-upper
+    Perm:
+      TensorValX: 1.0
+      TensorValY: 1.0
+      TensorValZ: 1.0
+      Type: Constant
+      Value: 1.0e-2
+    Porosity:
+      Type: Constant
+      Value: 0.25
+    RelPerm:
+      Alpha: 1.8
+      N: 1.3
+    Saturation:
+      Alpha: 1.8
+      N: 1.3
+      SRes: 0.1
+      SSat: 1.0
+    SpecificStorage:
+      Value: 0.00001
+GeomInput:
+  Names: domaininput
+  domaininput:
+    GeomName: domain 
+    GeomNames: domain
+    InputType: Box
+Gravity: 1.0
+ICPressure:
+  GeomNames: domain
+  Type: HydroStaticPatch
+KnownSolution: NoKnownSolution
+Mannings:
+  Geom:
+    domain:
+      Value: 0.00005
+  GeomNames: domain
+  Type: Constant
+Patch:
+  z-upper:
+    BCPressure:
+      Cycle: constant
+      Type: OverlandKinematic
+      alltime:
+        Value: 0
+  z-lower:
+    BCPressure:
+      Cycle: constant
+      Type: FluxConst
+      alltime:
+        Value: 0
+  y-lower:
+    BCPressure:
+      Cycle: constant
+      Type: DirEquilRefPatch
+      RefGeom: domain
+      RefPatch: z-upper
+      alltime:
+        Value: -3.0
+  y-upper:
+    BCPressure:
+      Cycle: constant
+      Type: DirEquilRefPatch
+      RefGeom: domain
+      RefPatch: z-upper
+      alltime:
+        Value: -2.0
+  x-lower:
+    BCPressure:
+      Cycle: constant
+      Type: FluxConst
+      alltime:
+        Value: 0
+  x-upper:
+    BCPressure:
+      Cycle: constant
+      Type: FluxConst
+      alltime:
+        Value: 0
+Perm:
+  TensorType: TensorByGeom
+Phase:
+  Names: water
+  RelPerm:
+    GeomNames: domain
+    Type: VanGenuchten
+  Saturation:
+    GeomNames: domain
+    Type: VanGenuchten
+  water:
+    Density:
+      Type: Constant
+      Value: 1.0
+    Viscosity:
+      Type: Constant
+      Value: 1.0
+PhaseSources:
+  water:
+    Geom:
+      domain:
+        Value: 0.0
+    GeomNames: domain
+    Type: Constant
+Process:
+  Topology:
+    P: 2
+    Q: 2
+    R: 1
+Solver:
+  AbsTol: 1.0e-10
+  Drop: 1.0e-20
+  Linear:
+    KrylovDimension: 15
+    MaxRestarts: 15
+    Preconditioner: PFMG
+  MaxConvergenceFailures: 8
+  MaxIter: 25000
+  Nonlinear:
+    Globalization: LineSearch
+    MaxIter: 80
+    ResidualTol: 1.0e-05
+    StepTol: 1.0e-30
+    UseJacobian: true
+    VariableDz: true
+  OverlandKinematic:
+    Epsilon: 1.0e-05
+  PrintMannings: true
+  PrintSaturation: true
+  PrintSlopes: true
+  PrintSubsurf: true
+  PrintOverlandSum: false
+  PrintOverlandBCFlux: false
+  PrintVelocities: true
+  TerrainFollowingGrid: true
+  _value_: Richards
+SpecificStorage:
+  GeomNames: domain
+  Type: Constant
+TimeStep:
+  Type: Growth
+  InitialStep: 0.1
+  GrowthFactor: 1.1
+  MaxStep: 100.0
+  MinStep: 0.001
+TimingInfo:
+  BaseUnit: 1
+  DumpInterval: -10.0 
+  StartCount: 0
+  StartTime: 0.0
+  StopTime: 53569
+TopoSlopesX:
+  Type: Constant
+  GeomNames: domain
+  Geom:
+    domain:
+      Value: 0
+TopoSlopesY:
+  Type: Constant
+  GeomNames: domain
+  Geom:
+    domain:
+      Value: 0.0001
+Wells:
+  Names: ''
+dzScale:
+  GeomNames: domain
+  Type: nzList
+  nzListNumber: 7
