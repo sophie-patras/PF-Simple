@@ -1,0 +1,69 @@
+BCPressure:
+  PatchNames: x-lower x-upper y-lower  y-upper z-lower z-upper
+Contaminants:
+  Names: ''
+Cycle:
+  Names: constant
+  constant:
+    Names: alltime
+    Repeat: -1
+    alltime:
+      Length: 1
+Geom:
+  domain:
+    ICPressure:
+      RefGeom: domain
+      RefPatch: z-upper
+      Value: -2.0
+    Patches: x-lower x-upper y-lower y-upper z-lower z-upper
+ICPressure:
+  GeomNames: domain
+  Type: HydroStaticPatch
+Patch:
+  z-upper:
+    BCPressure:
+      Cycle: constant
+      Type: OverlandKinematic
+      alltime:
+        Value: 0
+  z-lower:
+    BCPressure:
+      Cycle: constant
+      Type: FluxConst
+      alltime:
+        Value: 0
+  y-lower:
+    BCPressure:
+      Cycle: constant
+      Type: DirEquilRefPatch
+      RefGeom: domain
+      RefPatch: z-upper
+      alltime:
+        Value: -3.0
+  y-upper:
+    BCPressure:
+      Cycle: constant
+      Type: DirEquilRefPatch
+      RefGeom: domain
+      RefPatch: z-upper
+      alltime:
+        Value: -2.0
+  x-lower:
+    BCPressure:
+      Cycle: constant
+      Type: FluxConst
+      alltime:
+        Value: 0
+  x-upper:
+    BCPressure:
+      Cycle: constant
+      Type: FluxConst
+      alltime:
+        Value: 0
+PhaseSources:
+  water:
+    Geom:
+      domain:
+        Value: 0.0
+    GeomNames: domain
+    Type: Constant

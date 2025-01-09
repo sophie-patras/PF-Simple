@@ -1,0 +1,54 @@
+Geom:
+  Perm:
+    Names: domain
+    TensorByGeom:
+      Names: domain
+  Porosity:
+    GeomNames: domain
+  domain:
+    Perm:
+      TensorValX: 1.0
+      TensorValY: 1.0
+      TensorValZ: 1.0
+      Type: Constant
+      Value: 10
+    Porosity:
+      Type: Constant
+      Value: 0.1
+    RelPerm:
+      Alpha: 6
+      N: 2
+    Saturation:
+      Alpha: 6
+      N: 2
+      SRes: 0.2
+      SSat: 1.0
+    SpecificStorage:
+      Value: 1.0e-5
+Gravity: 1.0
+Mannings:
+  Geom:
+    domain:
+      Value: 1.0e-6
+  GeomNames: domain
+  Type: Constant
+Perm:
+  TensorType: TensorByGeom
+Phase:
+  Names: water
+  RelPerm:
+    GeomNames: domain
+    Type: VanGenuchten
+  Saturation:
+    GeomNames: domain
+    Type: VanGenuchten
+  water:
+    Density:
+      Type: Constant
+      Value: 1.0
+    Viscosity:
+      Type: Constant
+      Value: 1.0
+SpecificStorage:
+  GeomNames: domain
+  Type: Constant

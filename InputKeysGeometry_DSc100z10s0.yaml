@@ -1,0 +1,69 @@
+Cell:
+  '0':
+    dzScale:
+      Value: 0.3
+  '1':
+    dzScale:
+      Value: 0.3
+  '2':
+    dzScale:
+      Value: 0.2
+  '3':
+    dzScale:
+      Value: 0.1
+  '4':
+    dzScale:
+      Value: 0.05
+  '5':
+    dzScale:
+      Value: 0.025
+  '6':
+    dzScale:
+      Value: 0.025
+ComputationalGrid:
+  DX: 100
+  DY: 100
+  DZ: 10
+  Lower:
+    X: 0.0
+    Y: 0.0
+    Z: 0.0
+  NX: 100
+  NY: 100
+  NZ: 7
+Domain:
+  GeomName: domain
+Geom:
+  domain:
+    Upper:
+      X: 10000.0
+      Y: 10000.0
+      Z: 70.0
+    Lower:
+      X: 0.0
+      Y: 0.0
+      Z: 0.0
+GeomInput:
+  Names: domaininput
+  domaininput:
+    GeomName: domain 
+    GeomNames: domain
+    InputType: Box
+TopoSlopesX:
+  Type: Constant
+  GeomNames: domain
+  Geom:
+    domain:
+      Value: 0
+TopoSlopesY:
+  Type: Constant
+  GeomNames: domain
+  Geom:
+    domain:
+      Value: 0
+Wells:
+  Names: ''
+dzScale:
+  GeomNames: domain
+  Type: nzList
+  nzListNumber: 7

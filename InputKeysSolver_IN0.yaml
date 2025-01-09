@@ -1,0 +1,50 @@
+FileVersion: 4
+KnownSolution: NoKnownSolution
+Process:
+  Topology:
+    P: 2
+    Q: 2
+    R: 1
+Solver:
+  AbsTol: 1.0e-9
+  Drop: 1.0e-20
+  Linear:
+    KrylovDimension: 80
+    MaxRestarts: 20
+    Preconditioner: PFMG
+  MaxConvergenceFailures: 8
+  MaxIter: 2500
+  Nonlinear:
+    Globalization: InexactNewton
+    MaxIter: 100
+    ResidualTol: 1.0e-06
+    StepTol: 1.0e-20
+    UseJacobian: true
+    EtaChoice: Walker2
+    EtaAlpha: 2.0
+    EtaGamma: 0.9
+    VariableDz: true
+    PrintFlag: HighVerbosity
+  OverlandKinematic:
+    Epsilon: 1.0e-05
+  PrintMannings: true
+  PrintSaturation: true
+  PrintSlopes: true
+  PrintSubsurf: true
+  PrintOverlandSum: false
+  PrintOverlandBCFlux: false
+  PrintVelocities: true
+  TerrainFollowingGrid: true
+  _value_: Richards
+TimeStep:
+  Type: Growth
+  InitialStep: 0.025
+  GrowthFactor: 1.1
+  MaxStep: 10000.0
+  MinStep: 0.01
+TimingInfo:
+  BaseUnit: 1
+  DumpInterval: -2.0
+  StartCount: 0
+  StartTime: 0.0
+  StopTime: 120000
